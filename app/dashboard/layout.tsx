@@ -17,9 +17,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { redirect } from "next/navigation";
-// import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import { unstable_noStore as noStore } from "next/cache";
 import { DashboardNavigation } from "../components/dashbaord/DashboardNavigation";
 
@@ -29,12 +29,15 @@ export default async function DashboardLayout({
   children: ReactNode;
 }) {
   noStore();
-  // const { getUser } = getKindeServerSession();
-  // const user = await getUser();
+  const { getUser } = getKindeServerSession();
+  const user = await getUser();
 
   // if (!user || user.email !== "jan@alenix.de") {
   //   return redirect("/");
   // }
+  if (!user) {
+    return redirect("/");
+  }
   return (
     <div className="flex w-full flex-col max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <header className="sticky top-0 flex h-16 items-center justify-between gap-4 border-b bg-white">
@@ -75,8 +78,7 @@ export default async function DashboardLayout({
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              {/* <LogoutLink>Logout</LogoutLink> */}
-              <p>Logout</p>
+              <LogoutLink>Logout</LogoutLink>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
