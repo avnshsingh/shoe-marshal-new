@@ -35,6 +35,7 @@ export default async function DashboardLayout({
   // if (!user || user.email !== "jan@alenix.de") {
   //   return redirect("/");
   // }
+
   if (!user) {
     return redirect("/");
   }

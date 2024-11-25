@@ -5,6 +5,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  console.log("🚀 ~ file: page.tsx:7 ~ Home ~ Home:");
   return (
     <div>
       <Button asChild>
